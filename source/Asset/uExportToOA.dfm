@@ -1,0 +1,66 @@
+object ExportToOAForm: TExportToOAForm
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = #23548#20837#36164#20135#31995#32479#25968#25454#33267'OA'#31995#32479
+  ClientHeight = 155
+  ClientWidth = 599
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 24
+    Top = 44
+    Width = 113
+    Height = 24
+    AutoSize = False
+    Caption = #23548#20837'OA'#31995#32479':'
+    Color = clLime
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clLime
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 127
+    Top = 44
+    Width = 113
+    Height = 24
+    AutoSize = False
+    Caption = 'XXX'#26465#35760#24405
+    Color = clLime
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clLime
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+  end
+  object ProgressBar1: TProgressBar
+    Left = 24
+    Top = 96
+    Width = 549
+    Height = 25
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 500
+    Top = 40
+    Width = 73
+    Height = 33
+    Caption = #24320#22987
+    TabOrder = 1
+    OnClick = Button1Click
+  end
+end
