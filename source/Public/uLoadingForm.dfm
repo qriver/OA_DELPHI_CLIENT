@@ -20,6 +20,7 @@ object LoadingForm: TLoadingForm
   OldCreateOrder = False
   Visible = True
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object img1: TImage

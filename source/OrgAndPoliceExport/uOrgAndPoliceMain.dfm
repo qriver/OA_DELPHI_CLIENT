@@ -29,6 +29,10 @@ object OrgPoliceExport: TOrgPoliceExport
     FixedDimension = 19
     object TabSheet1: TRzTabSheet
       Caption = #32452#32455#26426#26500#23548#20986
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object rzpnl1: TRzPanel
         Left = 0
         Top = 0
@@ -64,7 +68,7 @@ object OrgPoliceExport: TOrgPoliceExport
             RzBtnLookup)
           object RzBtnLookup: TRzToolButton
             Left = 8
-            Top = 1
+            Top = -1
             Width = 149
             GradientColorStyle = gcsCustom
             ImageIndex = 251
@@ -80,7 +84,7 @@ object OrgPoliceExport: TOrgPoliceExport
           end
           object RzSpacer1: TRzSpacer
             Left = 0
-            Top = 1
+            Top = -1
             Grooved = True
           end
         end
@@ -179,6 +183,10 @@ object OrgPoliceExport: TOrgPoliceExport
     object TabSheet2: TRzTabSheet
       Color = clMedGray
       Caption = #35686#21592#20449#24687#23548#20986
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object rzpnl2: TRzPanel
         Left = 0
         Top = 0
@@ -213,8 +221,8 @@ object OrgPoliceExport: TOrgPoliceExport
             RzToolButton1)
           object RzToolButton1: TRzToolButton
             Left = 0
-            Top = 1
-            Width = 149
+            Top = -1
+            Width = 105
             GradientColorStyle = gcsCustom
             ImageIndex = 251
             Images = DataModule2.ImageListForBtns

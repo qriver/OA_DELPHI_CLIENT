@@ -14,7 +14,7 @@ object EquipmentForm: TEquipmentForm
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object RzPanel11: TRzPanel
+  object rzpnl3: TRzPanel
     Left = 0
     Top = 0
     Width = 813

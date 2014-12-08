@@ -11,6 +11,7 @@ type
     img1: TImage;
     lbl1: TLabel;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,7 +28,13 @@ implementation
 procedure TLoadingForm.FormCreate(Sender: TObject);
 begin
    TGIFImage(img1.Picture.Graphic).AnimationSpeed := 100;
-    TGIFImage(img1.Picture.Graphic).Animate := True;
+   TGIFImage(img1.Picture.Graphic).Animate := True;
+
+end;
+
+procedure TLoadingForm.FormDestroy(Sender: TObject);
+begin
+        // TGIFImage(img1.Picture.Graphic).Free;
 end;
 
 end.

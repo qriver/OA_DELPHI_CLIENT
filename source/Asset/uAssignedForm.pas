@@ -21,6 +21,24 @@ type
     dsMoveToGroup: TDataSource;
     cdsMoveToGroup: TClientDataSet;
     cdsMoveToDetail: TClientDataSet;
+    cxGrid1DBTableView1classname: TcxGridDBColumn;
+    cxGrid1DBTableView1kpbh: TcxGridDBColumn;
+    cxGrid1DBTableView1zcmc: TcxGridDBColumn;
+    cxGrid1DBTableView1syzt: TcxGridDBColumn;
+    cxGrid1DBTableView1pp: TcxGridDBColumn;
+    cxGrid1DBTableView1kjpzh: TcxGridDBColumn;
+    cxGrid1DBTableView1syr: TcxGridDBColumn;
+    cxGrid1DBTableView1remark2: TcxGridDBColumn;
+    cxGrid1DBTableView1bz: TcxGridDBColumn;
+    cxGrid1DBTableView1classcode: TcxGridDBColumn;
+    cxGrid1DBTableView1cfdd: TcxGridDBColumn;
+    cxGrid1DBTableView1zcfldm: TcxGridDBColumn;
+    cxGrid1DBTableView1qdrq: TcxGridDBColumn;
+    cxGrid1DBTableView1rzrq: TcxGridDBColumn;
+    cxGrid1DBTableView1jz: TcxGridDBColumn;
+    cxGrid1DBTableView1ggxh: TcxGridDBColumn;
+    cxGrid1DBTableView1toOAFlag: TcxGridDBColumn;
+    cxGrid1DBTableView1Errorcode: TcxGridDBColumn;
     procedure btnCompareWithOAClick(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
 

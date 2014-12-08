@@ -18,6 +18,7 @@ type
     btnCompareDeptAndPerson: TRzToolButton;
     btnEquipment: TRzToolButton;
     btnDeptAndPolice: TRzToolButton;
+    btnExit: TRzToolButton;
     procedure FormCreate(Sender: TObject);
 //    procedure RzPageControl1Change(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -25,6 +26,7 @@ type
     procedure btnCompareDeptAndPersonClick(Sender: TObject);
     procedure btnEquipmentClick(Sender: TObject);
     procedure btnDeptAndPoliceClick(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
   private
     adoConnect: TADOConnection;
     { Private declarations }
@@ -38,7 +40,7 @@ var
 
 
 implementation
-uses uOADbProxy,uAssetMainForm,CompareDeptAndPersonMainForm,uEquipmentForm,uOrgAndPoliceMain;
+uses uOADbProxy,uAssetMainForm,CompareDeptAndPersonMainForm,uEquipForm,uOrgPoliceMain;
 {$R *.dfm}
 
 
@@ -78,28 +80,33 @@ end;
 
 procedure TfrmMain.btnDeptAndPoliceClick(Sender: TObject);
 begin
-      if OrgPoliceExport=nil then
+      if OrgPoliceForm=nil then
   begin
-          OrgPoliceExport:=TOrgPoliceExport.Create(self);
+          OrgPoliceForm:=TOrgPoliceForm.Create(self);
   end ;
-  OrgPoliceExport.Visible:=True;
-  OrgPoliceExport.Parent:=RzPanel1;
-  OrgPoliceExport.BorderStyle:=bsNone;
-  OrgPoliceExport.Align:=alClient;
-  OrgPoliceExport.Show;
+  OrgPoliceForm.Visible:=True;
+  OrgPoliceForm.Parent:=RzPanel1;
+  OrgPoliceForm.BorderStyle:=bsNone;
+  OrgPoliceForm.Align:=alClient;
+  OrgPoliceForm.Show;
 end;
 
 procedure TfrmMain.btnEquipmentClick(Sender: TObject);
 begin
-      if EquipmentForm=nil then
+      if EquipForm=nil then
   begin
-          EquipmentForm:=TEquipmentForm.Create(self);
+          EquipForm:=TEquipForm.Create(self);
   end ;
-  EquipmentForm.Visible:=True;
-  EquipmentForm.Parent:=RzPanel1;
-  EquipmentForm.BorderStyle:=bsNone;
-  EquipmentForm.Align:=alClient;
-  EquipmentForm.Show;
+  EquipForm.Visible:=True;
+  EquipForm.Parent:=RzPanel1;
+  EquipForm.BorderStyle:=bsNone;
+  EquipForm.Align:=alClient;
+  EquipForm.Show;
+end;
+
+procedure TfrmMain.btnExitClick(Sender: TObject);
+begin
+  Application.Terminate;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -113,16 +120,16 @@ begin
        OaDeptAcds :=TClientDataSet.Create(self);
        OAPersonAcds :=TClientDataSet.Create(self);
 
-//       if not OraSession.Connected  then
-//       begin
-//           OraSession.Options.Direct:=true;
-//           OraSession.ConnectPrompt:=false;
-//           OraSession.Username:=uPublic.strUserName;
-//           OraSession.Password:=uPublic.strPassword;
-//           OraSession.Server:=uPublic.strUrl;
-//           OraSession.Connect;
-//       end;
-//      oaDbProxy:=TOaDbProxy.create;
+       if not OraSession.Connected  then
+       begin
+           OraSession.Options.Direct:=true;
+           OraSession.ConnectPrompt:=false;
+           OraSession.Username:=uPublic.strUserName;
+           OraSession.Password:=uPublic.strPassword;
+           OraSession.Server:=uPublic.strUrl;
+           OraSession.Connect;
+       end;
+      oaDbProxy:=TOaDbProxy.create;
 
 
 //        adoConnect:= ADODB.TADOConnection.create(self);

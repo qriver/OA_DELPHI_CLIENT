@@ -13,7 +13,7 @@ uses
 
 type
   TEquipmentForm = class(TForm)
-    RzPanel11: TRzPanel;
+    rzpnl3: TRzPanel;
     RzToolbar1: TRzToolbar;
     RzBtnLookup: TRzToolButton;
     RzSpacer1: TRzSpacer;

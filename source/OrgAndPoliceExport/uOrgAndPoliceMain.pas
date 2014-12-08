@@ -10,23 +10,10 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxGridCustomView, cxGrid,
   uROClient, uROSOAPMessage, uROBaseHTTPClient, uROWinInetHttpChannel,DBClient,
-  xmldom, Xmlxform, ComCtrls, uThreadForm;
+  xmldom, Xmlxform, ComCtrls, uGridBaseForm;
 
 type
-  TOrgPoliceExport = class(TThreadForm)
-    RzPageControl1: TRzPageControl;
-    TabSheet1: TRzTabSheet;
-    rzpnl1: TRzPanel;
-    TabSheet2: TRzTabSheet;
-    rzpnl2: TRzPanel;
-    RzToolbar1: TRzToolbar;
-    RzBtnLookup: TRzToolButton;
-    RzSpacer1: TRzSpacer;
-    RzToolbar2: TRzToolbar;
-    RzToolButton1: TRzToolButton;
-    cxGrid1: TcxGrid;
-    cxGrid1DBTableView1: TcxGridDBTableView;
-    cxGrid1Level1: TcxGridLevel;
+  TOrgPoliceExport = class(TGridBaseForm)
     ROSOAPMessage1: TROSOAPMessage;
     rwnthtpchnl1: TROWinInetHTTPChannel;
     DataSource1: TDataSource;
@@ -49,11 +36,15 @@ type
     dsPoliceDepName: TStringField;
     dsPoliceDepCode: TStringField;
     dsPoliceOtherDepCode: TStringField;
-    ProgressBar1: TProgressBar;
-    cxGrid2: TcxGrid;
-    cxGridDBTableView1: TcxGridDBTableView;
-    cxGridLevel1: TcxGridLevel;
     dsPoliceOtherDepName: TStringField;
+    RzPageControl1: TRzPageControl;
+    TabSheet1: TRzTabSheet;
+    rzpnl1: TRzPanel;
+    RzToolbar1: TRzToolbar;
+    RzBtnLookup: TRzToolButton;
+    RzSpacer1: TRzSpacer;
+    cxGrid1: TcxGrid;
+    cxGrid1DBTableView1: TcxGridDBTableView;
     cxGrid1DBTableView1jgdm: TcxGridDBColumn;
     cxGrid1DBTableView1Jgzsm: TcxGridDBColumn;
     cxGrid1DBTableView1Jgjc: TcxGridDBColumn;
@@ -62,6 +53,14 @@ type
     cxGrid1DBTableView1Sjzz: TcxGridDBColumn;
     cxGrid1DBTableView1ParentDepCode: TcxGridDBColumn;
     cxGrid1DBTableView1ParentDepFullName: TcxGridDBColumn;
+    cxGrid1Level1: TcxGridLevel;
+    TabSheet2: TRzTabSheet;
+    rzpnl2: TRzPanel;
+    RzToolbar2: TRzToolbar;
+    RzToolButton1: TRzToolButton;
+    ProgressBar1: TProgressBar;
+    cxGrid2: TcxGrid;
+    cxGridDBTableView1: TcxGridDBTableView;
     cxGridDBTableView1userid: TcxGridDBColumn;
     cxGridDBTableView1name: TcxGridDBColumn;
     cxGridDBTableView1employeeNumber: TcxGridDBColumn;
@@ -71,6 +70,7 @@ type
     cxGridDBTableView1DepCode: TcxGridDBColumn;
     cxGridDBTableView1OtherDepCode: TcxGridDBColumn;
     cxGridDBTableView1OtherDepName: TcxGridDBColumn;
+    cxGridLevel1: TcxGridLevel;
     procedure RzBtnLookupClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure RzToolButton1Click(Sender: TObject);
@@ -88,10 +88,10 @@ var
   OrgPoliceExport: TOrgPoliceExport;
 
 implementation
-uses OrgInfoInterace_Intf,XMLIntf,XMLDoc;
+uses OrgInfoInterace_Intf,XMLIntf,XMLDoc,OrgInfoInterace_Async;
 {$R *.dfm}
 //var htpchnl1:
-var srv:IOrgInfoService;
+var srv:IOrgInfoService_Async;
 var uOainfo:OAINFO;
 
 procedure TOrgPoliceExport.FormCreate(Sender: TObject);
@@ -99,7 +99,8 @@ var fieldJgdm:TField;
 begin
      inherited;
    uoainfo:=OAINFO.Create;
-   srv:=CoOrgInfoService.Create(self.ROSOAPMessage1,Self.rwnthtpchnl1);
+   //srv:=CoOrgInfoService.Create(self.ROSOAPMessage1,Self.rwnthtpchnl1);
+   srv:=CoOrgInfoService_Async.Create(self.ROSOAPMessage1,Self.rwnthtpchnl1);
    //orgcds.DataSetField.Fields.Add(fieldJgdm);
 end;
 
@@ -114,17 +115,20 @@ end;
 procedure TOrgPoliceExport.OnLoadDataEvent(Sender: TObject);
 var i:Integer;
 begin
-
-
    uOainfo.OARESULTFLAG:='';
    uOainfo.OAERROR:='';
-
-  // uOainfo:= srv.FNGETUSERINFO  ;
-
-repeat
-     Application.ProcessMessages;
-until(false) ;
-   Self.LoadCompleteFlag:=true;
+    try
+         //  uOainfo:= srv.FNGETUSERINFO  ;
+           srv.Invoke_FNGETUSERINFO ;
+          repeat
+           if  srv.AnswerReceived  then
+                     uOainfo:= srv.Retrieve_FNGETUSERINFO;
+             Application.ProcessMessages;
+          until(uOainfo.OARESULTFLAG<>'') ;
+    except
+           uOainfo.OARESULTFLAG:='N';
+    end;
+    Self.LoadCompleteFlag:=true;
 
 
 end;
@@ -139,7 +143,7 @@ var xmldoc:TXMLDocument;
 var i:Integer;
 begin
 
-      uOainfo:= srv.FNGETDEPINFO;
+    //  uOainfo:= srv.FNGETDEPINFO;
       s:=uOainfo.OARESULTFLAG;
 
       xmldoc:=TXMLDocument.Create(SELF);
@@ -195,18 +199,10 @@ end;
 
 procedure TOrgPoliceExport.RzToolButton1Click(Sender: TObject);
 var i ,j:Integer;
- var uzzinfo:ZZINFO;
+var uzzinfo:ZZINFO;
 var xmldoc:TXMLDocument;
     root,itemnode:IXMLNODE;
 begin
-
-     self.DoLoadData(self);  //触发 authread.execute动作，执行数据装载
-     repeat
-          Application.ProcessMessages;
-     until (false);
-
-
-
     if dsPolice.State=dsInactive then
      dsPolice.CreateDataSet
     else
@@ -216,7 +212,7 @@ begin
     end;
     self.ds2.DataSet:=nil;
 
-
+    self.DoLoadData(self);  //触发 authread.execute动作，执行数据装载
    // uOainfo:= srv.FNGETUSERINFOBYCODE(uzzinfo);  ;
     xmldoc:=TXMLDocument.Create(SELF);
 
@@ -306,19 +302,6 @@ begin
 
  end;
 
-//procedure TOrgPoliceExport.ThreadExecute(Sender: Tobject);
-//var i:Integer;
-//begin
-//   ShowMessage('dasf');
-//   uOainfo.OARESULTFLAG:='';
-//   uOainfo.OAERROR:='';
-//   //uOainfo:= srv.FNGETUSERINFO  ;
-//   for I := 0 to 1000 do
-//   begin
-//
-//   end;
-//   Self.LoadCompleteFlag:=true;
-//
-//end;
+
 
 end.

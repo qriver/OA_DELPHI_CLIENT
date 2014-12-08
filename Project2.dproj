@@ -90,8 +90,6 @@
 			<DCCReference Include="source\Public\uThreadForm.pas">
 				<Form>ThreadForm</Form>
 			</DCCReference>
-			<DCCReference Include="source\Public\TChildThread.pas"/>
-			<DCCReference Include="NewLibrary_Intf.pas"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -148,6 +146,7 @@
 					<Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
 						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="C:\Program Files\RemObjects Software\RemObjects SDK for Delphi\Dcu\D14\RemObjects_Indy_D14.bpl">RemObjects SDK - Indy Library</Excluded_Packages>
 					</Excluded_Packages>
 				</Delphi.Personality>
 			</BorlandProject>

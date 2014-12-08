@@ -18,12 +18,12 @@ uses
 
 const
   { Library ID }
-  LibraryUID = '{0FF883C9-BD33-4AFA-8470-53E565F90221}';
+  LibraryUID = '{C68BC420-BAD8-4349-8EF5-C354C351C1E1}';
   WSDLLocation = 'http://oa.domino.yc.hb/indishare/indiwscenter.nsf/wsDep?wsdl';
   TargetNamespace = 'urn:DefaultNamespace';
 
   { Service Interface ID's }
-  IOrgInfoService_IID : TGUID = '{FDCE280A-F297-475E-A759-1E6912AECA62}';
+  IOrgInfoService_IID : TGUID = '{70EC4A5F-7CCB-4812-81E5-DB5A3B38E87A}';
   OrgInfoService_EndPointURI = 'http://oa.domino.yc.hb:80/indishare/indiwscenter.nsf/wsDep?OpenWebService';
 
 type
@@ -94,7 +94,7 @@ type
 
   { IOrgInfoService }
   IOrgInfoService = interface
-    ['{FDCE280A-F297-475E-A759-1E6912AECA62}']
+    ['{70EC4A5F-7CCB-4812-81E5-DB5A3B38E87A}']
     function FNGETDEPINFO: OAINFO;
     function FNGETUSERINFO: OAINFO;
     function FNGETUSERINFOBYCODE(const ZZINFO: ZZINFO): OAINFO;

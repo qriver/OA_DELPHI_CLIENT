@@ -8,11 +8,8 @@ uses
 
 type
   TThreadForm = class(TForm)
-
-
   private
     { Private declarations }
-
   public
    fLoadDataEvent:TNotifyEvent ;
    LoadCompleteFlag:Boolean;
@@ -26,8 +23,8 @@ var
   ThreadForm: TThreadForm;
 
 implementation
-uses uLoadingForm,uMainForm,TChildThread;
-var uthread:TChildThreads;
+uses uLoadingForm,uMainForm;
+//var uthread:TChildThreads;
 {$R *.dfm}
 { TThreadForm }
 
@@ -42,11 +39,12 @@ begin
        LoadingForm.Left:=trunc(frmMain.Left+(frmMain.Width -LoadingForm.Width )/2);
        LoadingForm.Top:=trunc(frmMain.Top+(frmMain.Height -LoadingForm.Height)/2);
        LoadingForm.Show;
+       OnLoadDataEvent(self);
+       LoadingForm.Free;
+       //uthread:=TChildThreads.Create(true);
+       //uthread.uform:=self;
 
-       uthread:=TChildThreads.Create(true);
-       uthread.uform:=self;
-
-       uthread.Resume;
+      // uthread.Resume;
 end;
 
 

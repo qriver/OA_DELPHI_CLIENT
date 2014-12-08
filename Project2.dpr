@@ -18,9 +18,7 @@ uses
   uOrgAndPoliceMain in 'source\OrgAndPoliceExport\uOrgAndPoliceMain.pas' {OrgPoliceExport},
   OrgInfoInterace_Intf in 'source\OrgAndPoliceExport\OrgInfoInterace_Intf.pas',
   uLoadingForm in 'source\Public\uLoadingForm.pas' {LoadingForm},
-  uThreadForm in 'source\Public\uThreadForm.pas' {ThreadForm},
-  TChildThread in 'source\Public\TChildThread.pas',
-  NewLibrary_Intf in 'NewLibrary_Intf.pas';
+  uThreadForm in 'source\Public\uThreadForm.pas' {ThreadForm};
 
 {$R *.res}
 
@@ -29,5 +27,6 @@ begin
   //Application.MainFormOnTaskbar := True;
   Application.CreateForm(TDataModule2, DataModule2);
   Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TThreadForm, ThreadForm);
   Application.Run;
 end.
